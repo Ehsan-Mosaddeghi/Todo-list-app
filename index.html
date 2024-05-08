@@ -34,7 +34,7 @@
         </form>
 
         <div class="sort-by">
-          <label for="sort-by">sorted by</label>
+          <label for="sort-by">sorted by:</label>
           <select name="sort-by" id="sort-by">
             <option value="name">Name</option>
             <option value="date">Date</option>
@@ -42,29 +42,41 @@
           </select>
         </div>
 
-        <div>
-          <ul>
-            <div class="item-box">
-              <button>&Cross;</button>
-              <li>Coding</li>
-              <input type="checkbox" />
-            </div>
-            <div class="item-box">
-              <button>&Cross;</button>
-              <li>Going to University</li>
-              <input type="checkbox" />
-            </div>
-            <div class="item-box">
-              <button>&Cross;</button>
-              <li>Watching TV</li>
-              <input type="checkbox" />
-            </div>
-          </ul>
-        </div>
+        <ul class="main-list">
+          <div class="item-box">
+            <button class="item-btn">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+            <li class="item-title">Coding</li>
+            <button class="item-check">
+              <i class="fa-regular fa-circle-check"></i>
+            </button>
+          </div>
+
+          <div class="item-box">
+            <button class="item-btn">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+            <li class="item-title">Going to Univercity</li>
+            <button class="item-check">
+              <i class="fa-regular fa-circle-check"></i>
+            </button>
+          </div>
+
+          <div class="item-box">
+            <button class="item-btn">
+              <i class="fa-regular fa-trash-can"></i>
+            </button>
+            <li class="item-title">Watching TV</li>
+            <button class="item-check">
+              <i class="fa-regular fa-circle-check"></i>
+            </button>
+          </div>
+        </ul>
 
         <div class="progress">
           <div class="progress-bar-text">
-            <span>Your 0% of tasks are undone</span>
+            <span>Your 0% of tasks are done</span>
           </div>
           <div class="progress-bar">
             <div class="progress-bar-fill"></div>
