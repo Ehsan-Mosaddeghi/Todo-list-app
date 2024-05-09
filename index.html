@@ -11,6 +11,9 @@
       src="https://kit.fontawesome.com/21051b0a0d.js"
       crossorigin="anonymous"
     ></script>
+
+    <!-- main JS -->
+    <script defer src="script.js"></script>
   </head>
   <body>
     <div class="container">
@@ -25,7 +28,6 @@
         <form class="main-form">
           <i class="fa-solid fa-pen main-input-icon"></i>
           <input
-            src=""
             type="text"
             placeholder="Write your task..."
             class="main-input"
@@ -44,31 +46,31 @@
 
         <ul class="main-list">
           <div class="item-box">
-            <button class="item-btn">
+            <button class="item-del-btn">
               <i class="fa-regular fa-trash-can"></i>
             </button>
             <li class="item-title">Coding</li>
-            <button class="item-check">
+            <button class="item-check-btn">
               <i class="fa-regular fa-circle-check"></i>
             </button>
           </div>
 
           <div class="item-box">
-            <button class="item-btn">
+            <button class="item-del-btn">
               <i class="fa-regular fa-trash-can"></i>
             </button>
             <li class="item-title">Going to Univercity</li>
-            <button class="item-check">
+            <button class="item-check-btn">
               <i class="fa-regular fa-circle-check"></i>
             </button>
           </div>
 
           <div class="item-box">
-            <button class="item-btn">
+            <button class="item-del-btn">
               <i class="fa-regular fa-trash-can"></i>
             </button>
             <li class="item-title">Watching TV</li>
-            <button class="item-check">
+            <button class="item-check-btn">
               <i class="fa-regular fa-circle-check"></i>
             </button>
           </div>
@@ -76,7 +78,7 @@
 
         <div class="progress">
           <div class="progress-bar-text">
-            <span>Your 0% of tasks are done</span>
+            <span>0% of tasks are done</span>
           </div>
           <div class="progress-bar">
             <div class="progress-bar-fill"></div>
