@@ -17,7 +17,6 @@ body {
   min-height: 100lvh;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-around; */
   align-items: center;
 
   background: linear-gradient(#ffcfcf, #ffcdcd);
@@ -48,6 +47,7 @@ body {
   position: relative;
   width: 580px;
   min-height: 500px;
+  margin-bottom: 2.5rem;
 
   background: linear-gradient(135deg, #e8adad 25%, #c2b1d2 50%, #6698c7 85%);
   background-size: 200% 200%;
