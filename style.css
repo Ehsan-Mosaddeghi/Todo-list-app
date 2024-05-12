@@ -136,23 +136,39 @@ body {
 }
 
 .sort-by {
-  margin: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  margin: 1.5rem 1rem;
 }
 
-.sort-by > label {
+.sort-by label {
   font-size: 1.2rem;
 }
 
-.sort-by > select {
+.sort-by select {
   background-color: transparent;
   padding: 3px;
-  border: 1px solid #000;
+  border: 2px solid #000;
   border-radius: 7px;
   cursor: pointer;
   outline: none;
 
   option {
     background-color: #efcece;
+  }
+}
+
+.delete-all-btn {
+  padding: 4px 6px;
+  background-color: transparent;
+  border: 2px solid #000;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.5s linear;
+  font-size: 14px;
+
+  &:hover {
+    background-color: #ff5656;
   }
 }
 
@@ -236,6 +252,10 @@ body {
   margin: 0 1rem;
 }
 
+.progress-bar-text {
+  font-size: 17px;
+}
+
 .progress-bar {
   display: block;
   width: 100%;
@@ -244,6 +264,14 @@ body {
   border-radius: 10px;
 }
 
+.progress-bar-fill {
+  background-color: rgb(37, 168, 55);
+  display: block;
+  width: 50%;
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+}
 /* footer */
 
 .footer-background {
@@ -266,4 +294,9 @@ body {
   100% {
     background-position-x: -1000px;
   }
+}
+
+/* hidden */
+.hidden {
+  display: none;
 }
