@@ -1,5 +1,7 @@
 const addBtn = document.querySelector(".main-input-btn");
 const input = document.querySelector(".main-input");
+const inputIcon = document.querySelector(".main-input-icon");
+const form = document.querySelector(".main-form");
 const listContainer = document.querySelector(".main-list");
 const srotSelector = document.getElementById("sort-by");
 const progressText = document.querySelector(".progress-bar-text");
@@ -11,9 +13,31 @@ function addTask() {
     event.preventDefault();
     const task = input.value.trim();
 
-    task === "" ? alert("You must eneter something") : addTaskToList(task);
+    task === "" ? invalidInput() : addTaskToList(task);
     addProgressText();
+    checkDeleteBtn();
   });
+}
+input.addEventListener("input", () => {
+  if (input.classList.contains("invalid-input")) {
+    form.firstChild.nextSibling.remove();
+    input.classList.remove("invalid-input");
+    inputIcon.classList.remove("invalid-icon");
+  }
+});
+
+function invalidInput() {
+  if (!input.classList.contains("invalid-input")) {
+    form.insertAdjacentHTML(
+      "afterbegin",
+      `
+      <label class="invalid-label">Please enter a task</label>
+      `
+    );
+
+    input.classList.add("invalid-input");
+    inputIcon.classList.add("invalid-icon");
+  }
 }
 
 function addTaskToList(task) {
@@ -33,10 +57,8 @@ function addTaskToList(task) {
     </div>
     `
   );
-
   input.value = "";
   saveData();
-  showDeleteBtn();
 }
 addTask();
 
@@ -62,9 +84,9 @@ function showTasks() {
 }
 showTasks();
 
-const tasks = Array.from(listContainer.children);
-
 function sortTasks() {
+  const tasks = Array.from(listContainer.children);
+
   tasks
     .sort((a, b) => {
       const aText = a.textContent.trim();
@@ -99,7 +121,7 @@ function addProgressText() {
 
   tasksNumber > 0
     ? (progressText.textContent = `${completedTasksNumber} out of ${tasksNumber} (${completedTasksPercentage}%)`)
-    : null;
+    : (progressText.textContent = "Add your first task!");
 
   progressBar.style.width =
     tasksNumber > 0 ? `${completedTasksPercentage}%` : 0;
@@ -109,15 +131,17 @@ addProgressText();
 function reset() {
   localStorage.clear();
   showTasks();
+  checkDeleteBtn();
   addProgressText();
 }
 
 deleteAllBtn.addEventListener("click", () => {
-  showDeleteBtn();
   reset();
 });
 
-function showDeleteBtn() {
-  console.log(tasks);
-  tasks.length > 0 ? deleteAllBtn.classList.remove("hidden") : null;
+function checkDeleteBtn() {
+  listContainer.children.length > 0
+    ? deleteAllBtn.classList.remove("hidden")
+    : deleteAllBtn.classList.add("hidden");
 }
+checkDeleteBtn();

@@ -1,3 +1,4 @@
+/* google font */
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
 * {
@@ -94,12 +95,23 @@ body {
   outline: none;
 }
 
-.main-input:focus {
-  border: 2px solid #111;
+.invalid-input {
+  border: 2px solid #ff5656;
+}
+
+.invalid-label {
+  position: absolute;
+  top: -1.25rem;
+  left: 8.25rem;
+  color: #ff5656;
 }
 
 .main-input-icon {
   position: absolute;
+}
+
+.invalid-icon {
+  color: #ff5656;
 }
 
 .main-input-btn {
@@ -164,7 +176,7 @@ body {
   border: 2px solid #000;
   border-radius: 9px;
   cursor: pointer;
-  transition: all 0.5s linear;
+  transition: all 0.8s linear;
   font-size: 14px;
 
   &:hover {
@@ -191,7 +203,7 @@ body {
 }
 
 .new-item-ani {
-  animation: new-item-animation 0.8s ease-in-out forwards;
+  animation: new-item-animation 0.8s ease-in-out;
 }
 
 @keyframes new-item-animation {
@@ -212,6 +224,9 @@ body {
   border-radius: 6px;
   background-color: #ff5656;
   cursor: pointer;
+  &:hover {
+    background-color: #ff0000;
+  }
 }
 
 .item-check-btn {
@@ -221,6 +236,9 @@ body {
   border-radius: 6px;
   background-color: rgb(37, 168, 55);
   cursor: pointer;
+  &:hover {
+    background-color: rgb(0, 128, 0);
+  }
 }
 
 .item-checked {
@@ -298,5 +316,6 @@ body {
 
 /* hidden */
 .hidden {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
 }
