@@ -13,6 +13,15 @@ body {
   font-style: normal;
 }
 
+::-webkit-scrollbar {
+  width: 15px;
+  background-color: #cccccc;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4d4d4d;
+}
+
 .container {
   width: 100%;
   min-height: 100lvh;
@@ -26,10 +35,12 @@ body {
 /* header */
 
 .header {
+  width: calc(100% - 3rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   margin: 1rem 0;
 }
 
@@ -46,9 +57,10 @@ body {
 
 .main-box {
   position: relative;
-  width: 580px;
+  width: calc(100% - 3rem);
+  max-width: 580px;
   min-height: 500px;
-  margin-bottom: 2.5rem;
+  margin: 1rem 0 1.5rem;
 
   background: linear-gradient(135deg, #e8adad 25%, #c2b1d2 50%, #6698c7 85%);
   background-size: 200% 200%;
@@ -83,6 +95,10 @@ body {
   margin: 1.5rem 1rem 1rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid #000;
+
+  div {
+    position: relative;
+  }
 }
 
 .main-input {
@@ -97,6 +113,9 @@ body {
 
 .invalid-input {
   border: 2px solid #ff5656;
+  &::placeholder {
+    color: #fc7979;
+  }
 }
 
 .invalid-label {
@@ -108,6 +127,8 @@ body {
 
 .main-input-icon {
   position: absolute;
+  right: 10px;
+  top: 7px;
 }
 
 .invalid-icon {
@@ -261,7 +282,7 @@ body {
 
 .progress {
   position: absolute;
-  width: 94%;
+  width: calc(100% - 2rem);
   bottom: 10px;
   left: 0;
   display: flex;
@@ -318,4 +339,19 @@ body {
 .hidden {
   opacity: 0;
   pointer-events: none;
+}
+
+/*  */
+@media (max-width: 600px) {
+  .header-title {
+    font-size: 2.5rem;
+  }
+
+  .header-description {
+    font-size: 1.25rem;
+  }
+
+  .main-box {
+    margin: 0 1rem 0;
+  }
 }

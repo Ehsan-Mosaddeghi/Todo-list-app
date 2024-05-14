@@ -66,6 +66,7 @@ listContainer.addEventListener("click", function (e) {
   if (e.target.closest(".item-del-btn")) {
     e.target.closest(".item-del-btn").parentElement.remove();
     saveData();
+    checkDeleteBtn();
   } else if (e.target.closest(".item-check-btn")) {
     e.target
       .closest(".item-check-btn")
