@@ -1,46 +1,30 @@
+// SELECTORS
+// main slectors
+const listContainer = document.querySelector(".main-list");
+const form = document.querySelector(".main-form");
+//  buttons
 const addBtn = document.querySelector(".main-input-btn");
+const deleteAllBtn = document.querySelector(".delete-all-btn");
+//  input
 const input = document.querySelector(".main-input");
 const inputIcon = document.querySelector(".main-input-icon");
-const form = document.querySelector(".main-form");
-const listContainer = document.querySelector(".main-list");
-const srotSelector = document.getElementById("sort-by");
+const label = document.querySelector(".invalid-label");
+const sortSelector = document.getElementById("sort-by");
+// progress
 const progressText = document.querySelector(".progress-bar-text");
 const progressBar = document.querySelector(".progress-bar-fill");
-const deleteAllBtn = document.querySelector(".delete-all-btn");
 
-function addTask() {
-  addBtn.addEventListener("click", function (event) {
-    event.preventDefault();
-    const task = input.value.trim();
+// EVENT HANDLERS
+// Adding tasks
+function addTask(event) {
+  event.preventDefault();
 
-    task === "" ? invalidInput() : addTaskToList(task);
-    addProgressText();
-    checkDeleteBtn();
-  });
-}
-input.addEventListener("input", () => {
-  if (input.classList.contains("invalid-input")) {
-    form.firstChild.nextSibling.remove();
-    input.classList.remove("invalid-input");
-    inputIcon.classList.remove("invalid-icon");
-  }
-});
-
-function invalidInput() {
-  if (!input.classList.contains("invalid-input")) {
-    form.insertAdjacentHTML(
-      "afterbegin",
-      `
-      <label class="invalid-label">Please enter a task</label>
-      `
-    );
-
-    input.classList.add("invalid-input");
-    inputIcon.classList.add("invalid-icon");
-  }
+  const task = input.value.trim();
+  task === "" ? invalidInput() : createTask(task);
+  saveTasks();
 }
 
-function addTaskToList(task) {
+function createTask(task) {
   const date = new Date();
 
   listContainer.insertAdjacentHTML(
@@ -51,39 +35,65 @@ function addTaskToList(task) {
         <i class="fa-regular fa-trash-can"></i>
       </button>
       <li class="item-title">${task}</li>
-      <button class="item-check-btn">
+      <button class="item-complete-btn">
         <i class="fa-regular fa-circle-check"></i>
       </button>
     </div>
     `
   );
   input.value = "";
-  saveData();
 }
-addTask();
 
-listContainer.addEventListener("click", function (e) {
-  if (e.target.closest(".item-del-btn")) {
-    e.target.closest(".item-del-btn").parentElement.remove();
-    saveData();
-    checkDeleteBtn();
-  } else if (e.target.closest(".item-check-btn")) {
-    e.target
-      .closest(".item-check-btn")
-      .parentElement.classList.toggle("item-checked");
-    saveData();
-  }
-  addProgressText();
-});
+// Input Validation
+function invalidInput() {
+  if (input.classList.contains("invalid-input")) return;
 
-function saveData() {
+  label.classList.remove("hidden");
+  input.classList.add("invalid-input");
+  inputIcon.classList.add("invalid-icon");
+}
+
+function validInput() {
+  if (!input.classList.contains("invalid-input")) return;
+
+  label.classList.add("hidden");
+  input.classList.remove("invalid-input");
+  inputIcon.classList.remove("invalid-icon");
+}
+
+// Delete button
+
+function deleteTask(e) {
+  const deleteBtn = e.target.closest(".item-del-btn");
+  deleteBtn?.parentElement.remove();
+  saveTasks();
+}
+
+// Complete button
+
+function completeTask(e) {
+  const completeBtn = e.target.closest(".item-complete-btn");
+  completeBtn?.parentElement.classList.toggle("item-completed");
+  saveTasks();
+}
+
+// Saving Tasks in local storage
+
+function saveTasks() {
   localStorage.setItem("data", listContainer.innerHTML);
+  updateProgress();
+  updateDeleteAllBtn();
 }
+
+// showing Tasks from local storage
 
 function showTasks() {
   listContainer.innerHTML = localStorage.getItem("data");
+  updateProgress();
+  updateDeleteAllBtn();
 }
-showTasks();
+
+// Sorting Tasks
 
 function sortTasks() {
   const tasks = Array.from(listContainer.children);
@@ -96,53 +106,61 @@ function sortTasks() {
       const aDate = new Date(a.getAttribute("data-date"));
       const bDate = new Date(b.getAttribute("data-date"));
 
-      const aStatus = a.classList.contains("item-checked");
+      const aStatus = a.classList.contains("item-completed");
 
-      if (srotSelector.value === "name") return aText.localeCompare(bText);
-      if (srotSelector.value === "date") return aDate - bDate;
-      if (srotSelector.value === "status") return aStatus ? -1 : 1;
+      if (sortSelector.value === "name") return aText.localeCompare(bText);
+      if (sortSelector.value === "date") return aDate - bDate;
+      if (sortSelector.value === "status") return aStatus ? -1 : 1;
     })
     .map((task) => {
       listContainer.appendChild(task);
     });
-  saveData();
 }
-srotSelector.addEventListener("change", sortTasks);
 
-function addProgressText() {
-  const completedTasksNumber = Array.from(listContainer.children).filter(
-    (task) => task.classList.contains("item-checked")
+// Updating progress bar and text
+
+function updateProgress() {
+  const completedTaskNumbers = Array.from(listContainer.children).filter(
+    (task) => task.classList.contains("item-completed")
   ).length;
 
-  const tasksNumber = listContainer.children.length;
+  const taskNumbers = listContainer.children.length;
 
   const completedTasksPercentage = Number(
-    (completedTasksNumber / tasksNumber) * 100
+    (completedTaskNumbers / taskNumbers) * 100
   ).toFixed();
 
-  tasksNumber > 0
-    ? (progressText.textContent = `${completedTasksNumber} out of ${tasksNumber} (${completedTasksPercentage}%)`)
+  taskNumbers > 0
+    ? (progressText.textContent = `${completedTaskNumbers} out of ${taskNumbers} (${completedTasksPercentage}%)`)
     : (progressText.textContent = "Add your first task!");
 
   progressBar.style.width =
-    tasksNumber > 0 ? `${completedTasksPercentage}%` : 0;
+    taskNumbers > 0 ? `${completedTasksPercentage}%` : 0;
 }
-addProgressText();
+
+// Delete all button
 
 function reset() {
   localStorage.clear();
   showTasks();
-  checkDeleteBtn();
-  addProgressText();
 }
 
-deleteAllBtn.addEventListener("click", () => {
-  reset();
-});
-
-function checkDeleteBtn() {
+function updateDeleteAllBtn() {
   listContainer.children.length > 0
     ? deleteAllBtn.classList.remove("hidden")
     : deleteAllBtn.classList.add("hidden");
 }
-checkDeleteBtn();
+
+// EVENT LISTENERS
+// Click event listeners
+addBtn.addEventListener("click", addTask);
+listContainer.addEventListener("click", deleteTask);
+listContainer.addEventListener("click", completeTask);
+deleteAllBtn.addEventListener("click", reset);
+
+// Other event Listeners
+input.addEventListener("input", validInput);
+sortSelector.addEventListener("change", sortTasks);
+
+// On Load
+window.addEventListener("load", showTasks);

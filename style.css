@@ -1,6 +1,19 @@
 /* google font */
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
+:root {
+  /* colors */
+  --bg-color: linear-gradient(#ffcfcf, #ffcdcd);
+  --main-color: linear-gradient(135deg, #e8adad 25%, #c2b1d2 50%, #6698c7 85%);
+  --border-color: #1a1a1a;
+  --input-color: #ffcdcd;
+  --red-color: #fd6666;
+  --green-color: #25a837;
+  --task-bg-color: linear-gradient(90deg, #d0aaaa, #ffc5c5, #c2b1d2);
+  --scrollbar-bg-color: #cccccc;
+  --scrollthumb-bg-color: #4d4d4d;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -15,11 +28,11 @@ body {
 
 ::-webkit-scrollbar {
   width: 15px;
-  background-color: #cccccc;
+  background-color: var(--scrollbar-bg-color);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #4d4d4d;
+  background-color: var(--scrollthumb-bg-color);
 }
 
 .container {
@@ -29,7 +42,7 @@ body {
   flex-direction: column;
   align-items: center;
 
-  background: linear-gradient(#ffcfcf, #ffcdcd);
+  background: var(--bg-color);
 }
 
 /* header */
@@ -62,14 +75,13 @@ body {
   min-height: 500px;
   margin: 1rem 0 1.5rem;
 
-  background: linear-gradient(135deg, #e8adad 25%, #c2b1d2 50%, #6698c7 85%);
+  background: var(--main-color);
   background-size: 200% 200%;
   animation: gradient-animation 20s ease infinite;
 
   box-shadow: 15px 20px 20px rgb(40 50 58 / 80%),
     -15px 20px 20px rgb(40 50 58 / 80%);
   border-radius: 15px;
-  backdrop-filter: blur(5rem);
   z-index: 10;
 }
 
@@ -94,7 +106,7 @@ body {
   align-items: center;
   margin: 1.5rem 1rem 1rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid var(--border-color);
 
   div {
     position: relative;
@@ -102,27 +114,27 @@ body {
 }
 
 .main-input {
-  width: 200px;
+  width: 100%;
   height: 30px;
-  border: 2px solid #000;
+  border: 2px solid var(--border-color);
   border-radius: 10px;
   padding: 0.25rem 2rem 0.25rem 0.25rem;
-  background-color: #ffcdcd;
+  background-color: var(--input-color);
   outline: none;
 }
 
 .invalid-input {
-  border: 2px solid #ff5656;
+  border: 2px solid var(--red-color);
   &::placeholder {
-    color: #fc7979;
+    color: var(--red-color);
   }
 }
 
 .invalid-label {
   position: absolute;
-  top: -1.25rem;
-  left: 8.25rem;
-  color: #ff5656;
+  top: -1.5rem;
+  left: 2rem;
+  color: var(--red-color);
 }
 
 .main-input-icon {
@@ -132,12 +144,12 @@ body {
 }
 
 .invalid-icon {
-  color: #ff5656;
+  color: var(--red-color);
 }
 
 .main-input-btn {
-  color: #322f2f;
-  border: 2px solid #322f2f;
+  color: var(--border-color);
+  border: 2px solid var(--border-color);
   border-radius: 9px;
   padding: 5px 15px;
   font-size: 15px;
@@ -147,7 +159,7 @@ body {
   overflow: hidden;
   cursor: pointer;
   &:hover {
-    color: #000;
+    color: black;
   }
 }
 
@@ -159,7 +171,7 @@ body {
   top: 0;
   left: -1rem;
   transform: skewX(45deg);
-  background-color: rgb(37, 168, 55);
+  background-color: var(--green-color);
   z-index: -1;
   transition: all 1s;
 }
@@ -181,27 +193,27 @@ body {
 .sort-by select {
   background-color: transparent;
   padding: 3px;
-  border: 2px solid #000;
+  border: 2px solid var(--border-color);
   border-radius: 7px;
   cursor: pointer;
   outline: none;
 
   option {
-    background-color: #efcece;
+    background-color: var(--input-color);
   }
 }
 
 .delete-all-btn {
   padding: 4px 6px;
   background-color: transparent;
-  border: 2px solid #000;
+  border: 2px solid var(--border-color);
   border-radius: 9px;
   cursor: pointer;
   transition: all 0.8s linear;
   font-size: 14px;
 
   &:hover {
-    background-color: #ff5656;
+    background-color: var(--red-color);
   }
 }
 
@@ -213,13 +225,13 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: linear-gradient(90deg, #d0aaaa, #ffc5c5, #c2b1d2);
+  background: var(--task-bg-color);
   border-radius: 15px;
   padding: 1rem 0;
   margin: 0.75rem 1rem;
   transition: box-shadow 0.3s linear;
   &:hover {
-    box-shadow: 0 0 10px 0 #000;
+    box-shadow: 0 0 10px 0 black;
   }
 }
 
@@ -243,31 +255,31 @@ body {
   padding: 5px 8px;
   border: none;
   border-radius: 6px;
-  background-color: #ff5656;
+  background-color: var(--red-color);
   cursor: pointer;
   &:hover {
     background-color: #ff0000;
   }
 }
 
-.item-check-btn {
+.item-complete-btn {
   width: 25px;
   height: 25px;
   border: none;
   border-radius: 6px;
-  background-color: rgb(37, 168, 55);
+  background-color: var(--green-color);
   cursor: pointer;
   &:hover {
-    background-color: rgb(0, 128, 0);
+    background-color: #22a033;
   }
 }
 
-.item-checked {
-  background: rgb(37, 168, 55);
+.item-completed {
+  background: var(--green-color);
   transition: all 1s linear;
 }
 
-.item-checked li {
+.item-completed li {
   text-decoration: line-through;
 }
 
@@ -304,12 +316,13 @@ body {
 }
 
 .progress-bar-fill {
-  background-color: rgb(37, 168, 55);
+  background-color: var(--green-color);
   display: block;
-  width: 50%;
+  width: 0;
   height: 100%;
   border: none;
   border-radius: 10px;
+  transition: all 0.5s linear;
 }
 /* footer */
 

@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todolist App</title>
+
+    <!-- main css -->
     <link rel="stylesheet" href="style.css" />
 
     <!-- font awsome -->
@@ -28,7 +30,11 @@
         <form class="main-form">
           <div>
             <i class="fa-solid fa-pen main-input-icon"></i>
+            <label for="main-input" class="invalid-label hidden"
+              >Please enter a task</label
+            >
             <input
+              id="main-input"
               type="text"
               placeholder="Write your task..."
               class="main-input"
@@ -56,7 +62,7 @@
               <i class="fa-regular fa-trash-can"></i>
             </button>
             <li class="item-title">Test</li>
-            <button class="item-check-btn">
+            <button class="item-complete-btn">
               <i class="fa-regular fa-circle-check"></i>
             </button>
           </div> -->
