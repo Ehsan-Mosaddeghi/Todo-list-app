@@ -3,7 +3,7 @@
 
 :root {
   /* colors */
-  --bg-color: linear-gradient(#ffcfcf, #ffcdcd);
+  --bg-color: url("./wave-haikei.svg");
   --main-color: linear-gradient(135deg, #e8adad 25%, #c2b1d2 50%, #6698c7 85%);
   --border-color: #1a1a1a;
   --input-color: #ffcdcd;
@@ -43,6 +43,9 @@ body {
   align-items: center;
 
   background: var(--bg-color);
+  background-repeat: no-repeat;
+  object-fit: cover;
+  background-size: cover;
 }
 
 /* header */
@@ -59,11 +62,13 @@ body {
 
 .header-title {
   font-size: 3rem;
+  color: #d4d4d4;
 }
 
 .header-description {
   font-size: 1.5rem;
   margin: 1rem 0;
+  color: #a7a7a7;
 }
 
 /* main */
